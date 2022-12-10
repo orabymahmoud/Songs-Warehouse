@@ -133,10 +133,11 @@ def main(args):
         delete_iam_role(iam)
     else:
         role_arn = create_iam_role(iam)
+   
         create_redshift_cluster(redshift, role_arn)
 
         # Poll the Redshift cluster after creation until available
-        timestep = 15
+        timestep = 20
         for _ in range(int(600/timestep)):
             cluster = redshift.describe_clusters(ClusterIdentifier=DWH_CLUSTER_ID)['Clusters'][0]
             if cluster['ClusterStatus'] == 'available':

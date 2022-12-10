@@ -30,6 +30,26 @@ Choose `DB/DB_PASSWORD` in `dhw.cfg`.
 
 Create IAM role, Redshift cluster, and configure TCP connectivity
 
+```bash
+$ python create_cluster.py
+```
+
+Complete `dwh.cfg` with outputs from `create_cluster.py`
+* `CLUSTER/HOST`
+* `IAM_ROLE/ARN`
+
+Drop and recreate tables
+
+```bash
+$ python create_tables.py
+```
+
+Run ETL pipeline
+
+```bash
+$ python etl.py
+```
+
 Delete IAM role and Redshift cluster
 ```bash
 $ python create_cluster.py --delete

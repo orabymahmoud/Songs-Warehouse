@@ -20,39 +20,39 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 staging_events_table_create= ("""
     CREATE TABLE IF NOT EXISTS stage_event
     (
-        artist          varchar(100) NOT NULL,
-        auth            varchar(100) NOT NULL,
-        first_name      varchar(100) NOT NULL,
-        gender          varchar(100) NOT NULL,
+        artist          Text,
+        auth            Text,
+        first_name      Text,
+        gender          Text,
         item_in_session INTEGER,
-        last_name       varchar(100) NOT NULL,
+        last_name       Text,
         length          FLOAT4,
-        level           varchar(100) NOT NULL,
-        location        varchar(100) NOT NULL,
-        method          varchar(100) NOT NULL,
-        page            varchar(100) NOT NULL,
+        level           Text,
+        location        Text,
+        method          Text,
+        page            Text,
         registration    FLOAT8,
         session_id      INTEGER,
-        song            varchar(100) NOT NULL,
+        song            Text,
         status          INTEGER,
         ts              BIGINT,
-        user_agent      varchar(100) NOT NULL,
-        user_id         varchar(100) NOT NULL
+        user_agent      Text,
+        user_id         Text
     );
 """)
 
 staging_songs_table_create = ("""
     CREATE TABLE IF NOT EXISTS stage_song
     (
-        song_id             varchar(100) NOT NULL,
-        title               varchar(100) NOT NULL,
+        song_id             Text,
+        title               Text,
         duration            FLOAT4,
         year                SMALLINT,
-        artist_id           varchar(100) NOT NULL,
-        artist_name         varchar(100) NOT NULL,
+        artist_id           Text,
+        artist_name         Text,
         artist_latitude     REAL,
         artist_longitude    REAL,
-        artist_location     varchar(100) NOT NULL,
+        artist_location     Text,
         num_songs           INTEGER
     );
 """)
@@ -62,33 +62,33 @@ songplay_table_create = ("""
     (
         songplay_id    BIGINT IDENTITY(1, 1) PRIMARY KEY,
         start_time     TIMESTAMP NOT NULL SORTKEY,
-        user_id        varchar(100) NOT NULL NOT NULL DISTKEY,
-        level          varchar(100) NOT NULL,
-        song_id        varchar(100) NOT NULL,
-        artist_id      varchar(100) NOT NULL,
+        user_id        Text NOT NULL DISTKEY,
+        level          Text,
+        song_id        Text,
+        artist_id      Text,
         session_id     INTEGER,
-        location       varchar(100) NOT NULL,
-        user_agent     varchar(100) NOT NULL
+        location       Text,
+        user_agent     Text
     ) diststyle key;
 """)
 
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS users
     (
-        user_id     varchar(100) NOT NULL PRIMARY KEY SORTKEY,
-        first_name  varchar(100) NOT NULL,
-        last_name   varchar(100) NOT NULL,
-        gender      varchar(100) NOT NULL,
-        level       varchar(100) NOT NULL
+        user_id     Text PRIMARY KEY SORTKEY,
+        first_name  Text,
+        last_name   Text,
+        gender      Text,
+        level       Text
     ) diststyle all;
 """)
 
 song_table_create = ("""
     CREATE TABLE IF NOT EXISTS songs
     (
-        song_id     varchar(100) NOT NULL PRIMARY KEY SORTKEY,
-        title       varchar(100) NOT NULL,
-        artist_id   varchar(100) NOT NULL DISTKEY,
+        song_id     Text PRIMARY KEY SORTKEY,
+        title       Text,
+        artist_id   Text DISTKEY,
         year        SMALLINT,
         duration    FLOAT4
     ) diststyle key;
@@ -97,9 +97,9 @@ song_table_create = ("""
 artist_table_create = ("""
     CREATE TABLE IF NOT EXISTS artists
     (
-        artist_id   varchar(100) NOT NULL PRIMARY KEY SORTKEY,
-        name        varchar(100) NOT NULL,
-        location    varchar(100) NOT NULL,
+        artist_id   Text PRIMARY KEY SORTKEY,
+        name        Text,
+        location    Text,
         latitude    FLOAT4,
         longitude   FLOAT4
     ) diststyle all;
