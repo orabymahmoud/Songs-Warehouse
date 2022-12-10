@@ -24,20 +24,11 @@ This project combines song listen log files with song metadata to facilitate ana
 
 ## Run scripts
 
-Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-
-Choose `DB/DB_PASSWORD` in `dhw.cfg`.
-
 Create IAM role, Redshift cluster, and configure TCP connectivity
 
 ```bash
 $ python create_cluster.py
 ```
-
-Complete `dwh.cfg` with outputs from `create_cluster.py`
-* `CLUSTER/HOST`
-* `IAM_ROLE/ARN`
-
 Drop and recreate tables
 
 ```bash
@@ -54,8 +45,3 @@ Delete IAM role and Redshift cluster
 ```bash
 $ python create_cluster.py --delete
 ```
-
-## Further work
-
-* Add data quality checks
-* Create a dashboard for analytic queries on new database
